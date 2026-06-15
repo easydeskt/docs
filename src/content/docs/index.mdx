@@ -3,9 +3,9 @@ title: EasyDesk
 description: Мультиканальный агрегатор обращений — Telegram, ВКонтакте и Email в одном месте
 template: splash
 hero:
-  tagline: Тикеты из Telegram, ВКонтакте и Email — в одном рабочем пространстве
+  tagline: Тикеты из Telegram, ВКонтакте и Почты — в одном рабочем пространстве
   actions:
-    - text: Для операторов
+    - text: Начать работу
       link: /docs/operators/overview/
       icon: right-arrow
     - text: Для разработчиков
@@ -13,3 +13,17 @@ hero:
       icon: right-arrow
       variant: minimal
 ---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Для операторов" icon="information">
+		Команды бота, жизненный цикл тикетов, приоритеты, теги и шаблоны быстрых ответов — всё для работы в Telegram-суперагруппе и Mini App.
+	</Card>
+	<Card title="Для администраторов" icon="setting">
+		Подключение каналов Telegram, Email и ВКонтакте, управление агентами, тегами и шаблонами через Mini App.
+	</Card>
+	<Card title="Для разработчиков" icon="puzzle">
+		Архитектура, 15 Gradle-модулей, канальная абстракция, REST API, деплой через Docker Compose + Caddy.
+	</Card>
+</CardGrid>

@@ -1,0 +1,12 @@
+/* EasyDesk brand accent — sky blue */
+:root {
+	--sl-color-accent-low: #0c2a3a;
+	--sl-color-accent: #38bdf8;
+	--sl-color-accent-high: #bae6fd;
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: #e0f2fe;
+	--sl-color-accent: #0284c7;
+	--sl-color-accent-high: #075985;
+}

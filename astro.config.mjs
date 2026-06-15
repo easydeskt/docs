@@ -12,6 +12,7 @@ export default defineConfig({
 			locales: {
 				root: { label: 'Русский', lang: 'ru' },
 			},
+			customCss: ['./src/styles/custom.css'],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/easydeskt/docs' },
 			],
