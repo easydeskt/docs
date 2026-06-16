@@ -1,7 +1,7 @@
 :root {
 	--sl-font: 'Poppins', system-ui, sans-serif;
 	--sl-font-mono: 'JetBrains Mono', monospace;
-	--ed-logo-color: #eff9fc;
+	--ed-logo-color: #ffffff;
 }
 
 /* Dark mode colors */
@@ -37,6 +37,11 @@
 	--sl-color-hairline:       var(--sl-color-gray-5);
 	--sl-color-hairline-light: var(--sl-color-gray-5);
 	--ed-logo-color: #3dc4e0;
+}
+
+/* Nav title white in dark mode */
+:root:not([data-theme='light']) .site-title {
+	color: var(--sl-color-white);
 }
 
 /* Hero SVG fill */
