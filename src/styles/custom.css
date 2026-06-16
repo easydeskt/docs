@@ -49,6 +49,23 @@ starlight-theme-select label {
 	color: var(--sl-color-white);
 }
 
+/* Reduce hero top padding */
+@media (min-width: 50rem) {
+	.hero {
+		padding-block-start: 2rem;
+		padding-block-end: clamp(1.5rem, calc(0.5rem + 5vmin), 4rem);
+	}
+}
+
+/* Cards: 3 columns, equal height */
+.card-grid {
+	grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.card-grid > * {
+	height: 100%;
+}
+
 /* Hero SVG fill */
 .hero-html svg {
 	width: 100%;
