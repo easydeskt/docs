@@ -1,0 +1,85 @@
+---
+title: Архитектура системы
+description: Общая архитектура EasyDesk — принципы проектирования и основные компоненты
+---
+
+EasyDesk построен вокруг трёх ключевых принципов:
+
+**1. Канальная агностичность** — ядро системы (`core`, `service/*`) не зависит от конкретных мессенджеров. Весь платформенный код изолирован в модулях `channel/*` и реализует единый контракт `channel:api`.
+
+**2. Supervisor-agnostic модель** — платформенные ID (Telegram `user_id`, `topic_id`) хранятся в таблицах привязок отдельно от доменных сущностей. Ядро оперирует только абстрактными `agent_id` и `ticket_id`.
+
+**3. EventBus (SharedFlow)** — значимые события (создание тикета, смена статуса, назначение) публикуются в шину и доставляются подписчикам. Каждый подписчик сам отвечает за персистентность нужных ему данных.
+
+## Слои системы
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 510" role="img"
+     aria-label="Слои системы EasyDesk"
+     style="width:100%;max-width:660px;display:block;margin:2rem 0">
+  <style>{`
+    .a-text     { font-family: var(--sl-font, system-ui, sans-serif); fill: var(--sl-color-gray-1); }
+    .a-dim      { font-family: var(--sl-font, system-ui, sans-serif); fill: var(--sl-color-gray-3); }
+    .a-mono     { font-family: var(--sl-font-mono, monospace); fill: var(--sl-color-gray-1); }
+    .a-mono-dim { font-family: var(--sl-font-mono, monospace); fill: var(--sl-color-gray-3); }
+    .l-accent   { fill: var(--sl-color-gray-5); stroke: var(--sl-color-accent); stroke-width: 1.5; }
+    .l-normal   { fill: var(--sl-color-gray-5); stroke: var(--sl-color-gray-4); stroke-width: 1.5; }
+    .sub        { fill: var(--sl-color-gray-6); stroke: var(--sl-color-gray-4); stroke-width: 1; }
+    .arr        { stroke: var(--sl-color-gray-3); stroke-width: 1.5; marker-end: url(#ah); }
+  `}</style>
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M 0 0 L 8 3 L 0 6 Z" fill="var(--sl-color-gray-3)"/>
+    </marker>
+  </defs>
+
+  {/* Layer 1: Channels */}
+  <rect x="10" y="12" width="640" height="90" rx="8" className="l-accent"/>
+  <text x="26" y="28" font-size="11" dominant-baseline="middle" className="a-dim">входящие обращения</text>
+  <text x="26" y="46" font-size="13" font-weight="600" dominant-baseline="middle" className="a-text">Каналы</text>
+  <rect x="24" y="62" width="193" height="32" rx="5" className="sub"/>
+  <text x="121" y="78" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">Telegram DM</text>
+  <rect x="233" y="62" width="194" height="32" rx="5" className="sub"/>
+  <text x="330" y="78" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">Email</text>
+  <rect x="443" y="62" width="193" height="32" rx="5" className="sub"/>
+  <text x="540" y="78" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">ВКонтакте</text>
+
+  {/* Arrow 1 */}
+  <line x1="330" y1="104" x2="330" y2="129" className="arr"/>
+
+  {/* Layer 2: channel:api */}
+  <rect x="10" y="132" width="640" height="56" rx="8" className="l-normal"/>
+  <text x="330" y="153" font-size="11" text-anchor="middle" dominant-baseline="middle" className="a-mono-dim">контракт</text>
+  <text x="330" y="171" font-size="14" font-weight="600" text-anchor="middle" dominant-baseline="middle" className="a-mono">channel:api</text>
+
+  {/* Arrow 2 */}
+  <line x1="330" y1="190" x2="330" y2="215" className="arr"/>
+
+  {/* Layer 3: service/* */}
+  <rect x="10" y="218" width="640" height="90" rx="8" className="l-normal"/>
+  <text x="26" y="234" font-size="11" dominant-baseline="middle" className="a-mono-dim">бизнес-логика</text>
+  <text x="26" y="252" font-size="13" font-weight="600" dominant-baseline="middle" className="a-mono">service/*</text>
+  <rect x="24" y="268" width="141" height="32" rx="5" className="sub"/>
+  <text x="95"  y="284" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">tickets</text>
+  <rect x="177" y="268" width="141" height="32" rx="5" className="sub"/>
+  <text x="248" y="284" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">agents</text>
+  <rect x="330" y="268" width="141" height="32" rx="5" className="sub"/>
+  <text x="401" y="284" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">templates</text>
+  <rect x="483" y="268" width="143" height="32" rx="5" className="sub"/>
+  <text x="555" y="284" font-size="12" text-anchor="middle" dominant-baseline="middle" className="a-mono">audit</text>
+
+  {/* Arrow 3 */}
+  <line x1="330" y1="310" x2="330" y2="335" className="arr"/>
+
+  {/* Layer 4: core */}
+  <rect x="10" y="338" width="640" height="66" rx="8" className="l-accent"/>
+  <text x="330" y="362" font-size="15" font-weight="600" text-anchor="middle" dominant-baseline="middle" className="a-mono">core</text>
+  <text x="330" y="382" font-size="11" text-anchor="middle" dominant-baseline="middle" className="a-dim">доменные модели · EventBus · утилиты</text>
+
+  {/* Arrow 4 */}
+  <line x1="330" y1="406" x2="330" y2="431" className="arr"/>
+
+  {/* Layer 5: supervisor */}
+  <rect x="10" y="434" width="640" height="66" rx="8" className="l-accent"/>
+  <text x="330" y="459" font-size="14" font-weight="600" text-anchor="middle" dominant-baseline="middle" className="a-mono">supervisor:telegram</text>
+  <text x="330" y="479" font-size="11" text-anchor="middle" dominant-baseline="middle" className="a-dim">Бот в супергруппе · Mini App</text>
+</svg>
