@@ -3,8 +3,6 @@ title: Деплой
 description: Развёртывание EasyDesk с помощью Docker Compose, Caddy и переменных окружения
 ---
 
-# Деплой
-
 :::note[Раздел в разработке]
 Полная инструкция с примером `.env` и `docker-compose.yml` готовится.
 :::
