@@ -1,6 +1,7 @@
 :root {
 	--sl-font: 'Poppins', system-ui, sans-serif;
 	--sl-font-mono: 'JetBrains Mono', monospace;
+	--sl-content-width: 64rem;
 	--ed-logo-color: #ffffff;
 }
 
