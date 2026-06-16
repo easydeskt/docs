@@ -14,6 +14,7 @@ export default defineConfig({
 				alt: 'EasyDesk',
 				replacesTitle: false,
 			},
+			tableOfContents: false,
 			defaultLocale: 'root',
 			locales: {
 				root: { label: 'Русский', lang: 'ru' },
