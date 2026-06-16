@@ -57,9 +57,11 @@ starlight-theme-select label {
 	}
 }
 
-/* Cards: 3 columns, equal height */
-.card-grid {
-	grid-template-columns: repeat(3, 1fr) !important;
+/* Cards: 3 columns on wide screens, equal height */
+@media (min-width: 72rem) {
+	.card-grid {
+		grid-template-columns: repeat(3, 1fr) !important;
+	}
 }
 
 .card-grid > * {
