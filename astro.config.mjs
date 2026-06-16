@@ -8,11 +8,23 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'EasyDesk',
+			logo: {
+				light: './src/assets/logo-cyan.svg',
+				dark: './src/assets/logo-white.svg',
+				alt: 'EasyDesk',
+				replacesTitle: false,
+			},
 			defaultLocale: 'root',
 			locales: {
 				root: { label: 'Русский', lang: 'ru' },
 			},
-			customCss: ['./src/styles/custom.css'],
+			customCss: [
+				'@fontsource/poppins/400.css',
+				'@fontsource/poppins/600.css',
+				'@fontsource/jetbrains-mono/400.css',
+				'@fontsource/jetbrains-mono/600.css',
+				'./src/styles/custom.css',
+			],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/easydeskt/docs' },
 			],

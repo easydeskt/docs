@@ -1,12 +1,52 @@
-/* EasyDesk brand accent — sky blue */
 :root {
-	--sl-color-accent-low: #0c2a3a;
-	--sl-color-accent: #38bdf8;
-	--sl-color-accent-high: #bae6fd;
+	--sl-font: 'Poppins', system-ui, sans-serif;
+	--sl-font-mono: 'JetBrains Mono', monospace;
+	--ed-logo-color: #eff9fc;
 }
 
+/* Dark mode colors */
+:root {
+	--sl-color-accent-low:  #082334;
+	--sl-color-accent:      #3dc4e0;
+	--sl-color-accent-high: #9ee8f7;
+	--sl-color-white:       #ffffff;
+	--sl-color-gray-1:      #dde2e8;
+	--sl-color-gray-2:      #c8ced6;
+	--sl-color-gray-3:      #96a0ad;
+	--sl-color-gray-4:      #3d444d;
+	--sl-color-gray-5:      #272d35;
+	--sl-color-gray-6:      #181e24;
+	--sl-color-black:       #0f1318;
+}
+
+/* Light mode colors */
 :root[data-theme='light'] {
-	--sl-color-accent-low: #e0f2fe;
-	--sl-color-accent: #0284c7;
-	--sl-color-accent-high: #075985;
+	--sl-color-accent-low:  #9ee8f7;
+	--sl-color-accent:      #0891b2;
+	--sl-color-accent-high: #074f62;
+	--sl-color-white:       #000000;
+	--sl-color-gray-1:      #0f1318;
+	--sl-color-gray-2:      #181e24;
+	--sl-color-gray-3:      #272d35;
+	--sl-color-gray-4:      #96a0ad;
+	--sl-color-gray-5:      #e5e7eb;
+	--sl-color-gray-6:      #f3f4f6;
+	--sl-color-gray-7:      #f9fafb;
+	--sl-color-black:       #ffffff;
+
+	--sl-color-hairline:       var(--sl-color-gray-5);
+	--sl-color-hairline-light: var(--sl-color-gray-5);
+	--ed-logo-color: #3dc4e0;
+}
+
+/* Hero SVG fill */
+.hero-html svg {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* View transitions */
+@view-transition {
+	navigation: auto;
 }
