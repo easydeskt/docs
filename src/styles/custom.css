@@ -39,6 +39,11 @@
 	--ed-logo-color: #3dc4e0;
 }
 
+/* Theme switcher: Poppins is wider than the default font, bump the computed width */
+starlight-theme-select label {
+	--sl-select-width: 8em !important;
+}
+
 /* Nav title white in dark mode */
 :root:not([data-theme='light']) .site-title {
 	color: var(--sl-color-white);
